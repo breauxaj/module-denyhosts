@@ -9,6 +9,10 @@ define denyhosts::allow (
     /(?i-mx:centos|fedora|redhat|scientific)/ => '/var/lib/denyhosts',
   }
 
+  $service = $::operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
+  }
+
   file { "${path}/${config}":
     ensure  => present,
     owner   => 'root',
@@ -16,6 +20,7 @@ define denyhosts::allow (
     mode    => '0644',
     content => template('denyhosts/allowed-hosts.erb'),
     require => File[$path],
+    notify  => Service[$service],
   }
 
   file { $path:
