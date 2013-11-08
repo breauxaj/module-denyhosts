@@ -145,136 +145,40 @@ AGE_RESET_INVALID=10d
 RESET_ON_SUCCESS = <%= reset_on_success.upcase %>
 <% end -%>
 
+<% if plugin_deny and ! plugin_deny.empty? -%>
+PLUGIN_DENY = <%= plugin_deny %>
+<% end -%>
+<% if plugin_purge and ! plugin_purge.empty? -%>
+PLUGIN_PURGE = <%= plugin_purge %>
+<% end -%>
 
-
-
-#
-#####################################################################
-
-
-######################################################################
-#
-# PLUGIN_DENY: If set, this value should point to an executable
-# program that will be invoked when a host is added to the
-# HOSTS_DENY file.  This executable will be passed the host
-# that will be added as it's only argument.
-#
-#PLUGIN_DENY=/usr/bin/true
-#
-######################################################################
-
-
-######################################################################
-#
-# PLUGIN_PURGE: If set, this value should point to an executable
-# program that will be invoked when a host is removed from the
-# HOSTS_DENY file.  This executable will be passed the host
-# that is to be purged as it's only argument.
-#
-#PLUGIN_PURGE=/usr/bin/true
-#
-# The following plugin will restore the file contexts on /etc/hosts.deny after
-# denyhosts purges old entries.  This prevents breakage when selinux is set to
-# enforcing mode, but still has a small window where the context is set
-# incorrectly.  The correct place to fix this is in the selinux policy.
-#
-#PLUGIN_PURGE=/usr/share/denyhosts/plugins/restorecon.sh
-#
-######################################################################
-
-######################################################################
-#
-# USERDEF_FAILED_ENTRY_REGEX: if set, this value should contain
-# a regular expression that can be used to identify additional
-# hackers for your particular ssh configuration.  This functionality
-# extends the built-in regular expressions that DenyHosts uses.
-# This parameter can be specified multiple times.
-# See this faq entry for more details:
-#    http://denyhosts.sf.net/faq.html#userdef_regex
-#
-#USERDEF_FAILED_ENTRY_REGEX=
-#
-#
-######################################################################
-
-
-
+<% if userdef_failed_entry_regex and ! userdef_failed_entry_regex.empty? -%>
+<% userdef_failed_entry_regex.each do |ufer| -%>
+USERDEF_FAILED_ENTRY_REGEX = <%= ufer %>
+<% end -%>
+<% end -%>
 
    ######### THESE SETTINGS ARE SPECIFIC TO DAEMON MODE  ##########
 
-
-
-#######################################################################
-#
-# DAEMON_LOG: when DenyHosts is run in daemon mode (--daemon flag)
-# this is the logfile that DenyHosts uses to report it's status.
-# To disable logging, leave blank.  (default is: /var/log/denyhosts)
-#
+<% if daemon_log and ! daemon_log.empty? -%>
+DAEMON_LOG = <%= daemon_log %>
+<% else -%>
 DAEMON_LOG = /var/log/denyhosts
-#
-# disable logging:
-#DAEMON_LOG = 
-#
-######################################################################
+<% end -%>
+<% if daemon_log_time_format and ! daemon_log_time_format.empty? -%>  
+DAEMON_LOG_TIME_FORMAT = <%= daemon_log_time_format %>
+<% end -%>
+<% if daemon_log_message_format and ! daemon_log_message_format.empty? -%>
+DAEMON_LOG_MESSAGE_FORMAT = <%= daemon_log_message_format %>
+<% end -%>
 
-#######################################################################
-# 
-# DAEMON_LOG_TIME_FORMAT: when DenyHosts is run in daemon mode 
-# (--daemon flag) this specifies the timestamp format of 
-# the DAEMON_LOG messages (default is the ISO8061 format:
-# ie. 2005-07-22 10:38:01,745)
-#
-# for possible values for this parameter refer to: man strftime
-#
-# Jan 1 13:05:59   
-#DAEMON_LOG_TIME_FORMAT = %b %d %H:%M:%S
-#
-# Jan 1 01:05:59 
-#DAEMON_LOG_TIME_FORMAT = %b %d %I:%M:%S
-#
-###################################################################### 
-
-#######################################################################
-# 
-# DAEMON_LOG_MESSAGE_FORMAT: when DenyHosts is run in daemon mode 
-# (--daemon flag) this specifies the message format of each logged
-# entry.  By default the following format is used:
-#
-# %(asctime)s - %(name)-12s: %(levelname)-8s %(message)s
-#
-# Where the "%(asctime)s" portion is expanded to the format
-# defined by DAEMON_LOG_TIME_FORMAT
-#
-# This string is passed to python's logging.Formatter contstuctor.
-# For details on the possible format types please refer to:
-# http://docs.python.org/lib/node357.html
-#
-# This is the default:
-#DAEMON_LOG_MESSAGE_FORMAT = %(asctime)s - %(name)-12s: %(levelname)-8s %(message)s
-#
-#
-###################################################################### 
-
- 
-#######################################################################
-#
-# DAEMON_SLEEP: when DenyHosts is run in daemon mode (--daemon flag)
-# this is the amount of time DenyHosts will sleep between polling
-# the SECURE_LOG.  See the comments in the PURGE_DENY section (above)
-# for details on specifying this value or for complete details
-# refer to:    http://denyhosts.sourceforge.net/faq.html#timespec
-# 
-#
+<% if daemon_sleep and ! daemon_sleep.empty? -%>
+DAEMON_SLEEP = <%= daemon_sleep %>
+<% else -%>
 DAEMON_SLEEP = 30s
-#
-#######################################################################
-
-#######################################################################
-#
-# DAEMON_PURGE: How often should DenyHosts, when run in daemon mode,
-# run the purge mechanism to expire old entries in HOSTS_DENY
-# This has no effect if PURGE_DENY is blank.
-#
+<% end -%>
+<% if daemon_purge and ! daemon_purge.emtpy? -%>
+DAEMON_PURGE = <%= daemon_purge -%>
+<% else -%>
 DAEMON_PURGE = 1h
-#
-#######################################################################
+<% end -%>
