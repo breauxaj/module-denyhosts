@@ -17,3 +17,11 @@ denyhosts::allow { 'default':
   whitelist => [ '192.168.1.*' ],
 }
 ```
+
+License
+-------
+GPL3
+
+Contact
+-------
+breauxaj AT gmail DOT com
