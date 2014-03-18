@@ -6,9 +6,14 @@ define denyhosts::service (
     /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
   }
 
+  $depends = $::operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
+  }
+
   service { $service:
-    ensure => $ensure,
-    enable => $enable,
+    ensure  => $ensure,
+    enable  => $enable,
+    require => Package[$depends],
   }
 
 }

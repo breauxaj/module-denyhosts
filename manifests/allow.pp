@@ -5,6 +5,10 @@ define denyhosts::allow (
     /(?i-mx:centos|fedora|redhat|scientific)/ => 'allowed-hosts',
   }
 
+  $depends = $::operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
+  }
+
   $path = $::operatingsystem ? {
     /(?i-mx:centos|fedora|redhat|scientific)/ => '/var/lib/denyhosts',
   }
@@ -28,7 +32,7 @@ define denyhosts::allow (
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
-    require => Package['denyhosts'],
+    require => Package[$depends],
   }
 
 }
