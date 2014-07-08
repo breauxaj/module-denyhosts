@@ -7,7 +7,7 @@ class denyhosts (
 
   package { $required:
     ensure  => $ensure,
-    require => Package['openssh'],
+    require => Package['openssh-server'],
   }
 
 }
