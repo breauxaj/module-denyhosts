@@ -1,3 +1,28 @@
+# Define: denyhosts::allow
+#
+# This define configures the whitelist
+#
+# Parameters:
+#
+#  whitelist:
+#    Array of IP addresses to whitelist
+#
+# Actions:
+#   - Updates the allowed-hosts file with configured whitelist
+#   - Notify the denyhosts service
+#
+# Requires:
+#
+#  EPEL repository
+#
+# Sample Usage:
+#
+#  To whitelist an IP, use:
+#
+#    denyhosts::allow { 'default':
+#      whitelist => [ '192.168.1.1' ]
+#    }
+#
 define denyhosts::allow (
   $whitelist = [ '' ]
 ) {
