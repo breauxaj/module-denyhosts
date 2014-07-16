@@ -32,7 +32,7 @@
 #    Determines whethere suspicious logins will be reported from allowed hosts
 #
 #  hostname_lookup:
-#    Determines whethere Denyhosts performs a host name lookup
+#    Determines whether Denyhosts performs a host name lookup
 #
 #  admin_email:
 #    Reports will be sent to this user
@@ -49,6 +49,60 @@
 #  smtp_password:
 #    Password for authenticated SMTP
 #
+#  smtp_from:
+#    Set a from address for reports
+#
+#  smtp_subject:
+#    Set a subject for reports
+#
+#  smtp_date_format:
+#    Set the date format for the report
+#
+#  syslog_report:
+#    Send the denyhosts events to syslog
+#
+#  allowed_hosts_hostname_lookup:
+#    Determines whether Denyhosts performs a host name lookup
+#
+#  age_reset_value:
+#    Determines when failed logins will reset back to 0
+#
+#  age_reset_root:
+#    Determines when failed logins for root will reset back to 0
+#
+#  age_reset_restricted:
+#    Determines when failed logins for restricted users will reset back to 0
+#
+#  age_reset_invalid:
+#    Determines when failed logins for invalid users will reset back to 0
+#
+#  reset_on_success:
+#    Determines whether to reset on successful login
+#
+#  plugin_deny:
+#    Triggered when a deny event is handled
+#
+#  plugin_purge:
+#    Triggered when a purge event is handled
+#
+#  userdef_failed_entry_regex:
+#    Define a regex for user matching
+#
+#  daemon_log:
+#    Sets the log file for activity
+#
+#  daemon_log_time_format
+#    Sets the time format for the activity log
+#
+#  daemon_log_message_format
+#    Sets the message format for the activity log
+#
+#  daemon_sleep:
+#    Sets the polling interval for the secure_log
+#
+#  daemon_purge:
+#    Set the frequency of the purge task
+#
 # Actions:
 #   - Applies settings to the denyhosts.conf file
 #
@@ -58,10 +112,10 @@
 #
 # Sample Usage:
 #
-#  To whitelist an IP, use:
+#  To configure the service, use:
 #
-#    denyhosts::allow { 'default':
-#      whitelist => [ '192.168.1.1' ]
+#    denyhosts::config { 'default':
+#      admin_email => 'admin@domain.com',
 #    }
 #
 define denyhosts::config (
