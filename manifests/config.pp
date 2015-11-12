@@ -29,12 +29,8 @@ define denyhosts::config (
 
   $key = $title
 
-  $context = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => '/etc/denyhosts.conf',
-  }
-
   augeas { "denyhosts_conf/${key}":
-    context => $context,
+    context => $::denyhosts::params::denyhosts_config,
     onlyif  => "get ${key} != '${value}'",
     changes => "set ${key} '${value}'",
   }

@@ -30,12 +30,8 @@
 #
 class denyhosts (
   $ensure = 'latest'
-){
-  $required = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
-  }
-
-  package { $required:
+) inherits ::denyhosts::params {
+  package { $::denyhosts::params::denyhosts_package:
     ensure  => $ensure,
   }
 
