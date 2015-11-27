@@ -18,8 +18,8 @@
 #
 #  To configure the service, use:
 #
-#    denyhosts::config { 'default':
-#      admin_email => 'admin@domain.com',
+#    denyhosts::config {
+#      'ADMIN_EMAIL': value => 'admin@domain.com';
 #    }
 #
 define denyhosts::config (
@@ -30,7 +30,7 @@ define denyhosts::config (
   $key = $title
 
   augeas { "denyhosts_conf/${key}":
-    context => $::denyhosts::params::denyhosts_config,
+    context => $::denyhosts::params::denyhosts_context,
     onlyif  => "get ${key} != '${value}'",
     changes => "set ${key} '${value}'",
   }

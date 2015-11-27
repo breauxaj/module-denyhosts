@@ -13,7 +13,7 @@ class denyhosts::params {
 
       $denyhosts_allowed = "${denyhosts_path}/allowed-hosts"
 
-      $denyhosts_config  = '/files/etc/denyhosts.conf'
+      $denyhosts_context = '/files/etc/denyhosts.conf'
 
       $denyhosts_package = 'httpd'
 
