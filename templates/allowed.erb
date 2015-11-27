@@ -1,0 +1,8 @@
+# MANAGED BY PUPPET!
+127.0.0.1
+
+<% if @whitelist and @whitelist.kind_of?(Array) and ! @whitelist.empty? -%>
+<% @whitelist.each do |white| -%>
+<%= white %>
+<% end -%>
+<% end -%>

@@ -26,38 +26,24 @@
 define denyhosts::allow (
   $whitelist = [ '' ]
 ) {
-  $config = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => 'allowed-hosts',
-  }
+  include ::denyhosts
 
-  $depends = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
-  }
-
-  $path = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => '/var/lib/denyhosts',
-  }
-
-  $service = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
-  }
-
-  file { "${path}/${config}":
+  file { $::denyhosts::params::denyhosts_allowed:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('denyhosts/allowed-hosts.erb'),
-    require => File[$path],
-    notify  => Service[$service],
+    content => template('denyhosts/allowed.erb'),
+    require => File[$::denyhosts::params::denyhosts_path],
+    notify  => Service[$::denyhosts::params::denyhosts_service],
   }
 
-  file { $path:
+  file { $::denyhosts::params::denyhosts_path:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
-    require => Package[$depends],
+    require => Package[$::denyhosts::params::denyhosts_package],
   }
 
 }

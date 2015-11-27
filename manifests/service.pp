@@ -30,18 +30,12 @@ define denyhosts::service (
   $ensure = running,
   $enable = true
 ) {
-  $service = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
-  }
+  include ::denyhosts
 
-  $depends = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'denyhosts' ],
-  }
-
-  service { $service:
+  service { $::denyhosts::params::denyhosts_service:
     ensure  => $ensure,
     enable  => $enable,
-    require => Package[$depends],
+    require => Package[$::denyhosts::params::denyhosts_package],
   }
 
 }
