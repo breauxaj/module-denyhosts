@@ -15,9 +15,9 @@ class denyhosts::params {
 
       $denyhosts_context = '/files/etc/denyhosts.conf'
 
-      $denyhosts_package = 'httpd'
+      $denyhosts_package = 'denyhosts'
 
-      $denyhosts_service = 'httpd'
+      $denyhosts_service = 'denyhosts'
     }
     default: { }
   }
