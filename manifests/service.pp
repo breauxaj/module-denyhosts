@@ -33,8 +33,8 @@ define denyhosts::service (
   include ::denyhosts
 
   service { $::denyhosts::params::denyhosts_service:
-    ensure  => running,
-    enable  => true,
+    ensure  => $ensure,
+    enable  => $enable,
     require => Package[$::denyhosts::params::denyhosts_package],
   }
 
