@@ -1,6 +1,10 @@
 denyhosts
 =========
 
+DenyHosts is a script intended to be run by Linux system administrators to help
+thwart SSH server attacks (also known as dictionary based attacks and brute
+force attacks).
+
 Samples
 -------
 ```
@@ -51,9 +55,12 @@ denyhosts::config {
   "DAEMON_PURGE":                           value => '1h';
 }
 ```
-```
-denyhosts::service { 'default': ensure => running, enable => true }
-```
+
+
+Hiera
+-----
+
+Review the hiera folder for samples of the usage.
 
 License
 -------
