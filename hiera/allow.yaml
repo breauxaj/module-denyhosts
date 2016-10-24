@@ -1,0 +1,5 @@
+denyhosts::allow:
+  'default':
+    whitelist:
+      - '172.16.0.1'
+      - '192.168.100.1'
