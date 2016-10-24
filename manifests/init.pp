@@ -29,6 +29,9 @@ class denyhosts (
     ensure  => $ensure,
   }
 
+  $config = hiera_hash('denyhosts',{})
+  create_resources('denyhosts::config',$config)
+
   service { $::denyhosts::params::denyhosts_service:
     ensure  => running,
     enable  => true,

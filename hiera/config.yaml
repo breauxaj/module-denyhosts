@@ -1,0 +1,71 @@
+denyhosts::config:
+  'SECURE_LOG':
+    value: '/var/log/secure'
+  'HOSTS_DENY':
+    value: '/etc/hosts.deny'
+  'PURGE_DENY':
+    value: '4w'
+  'BLOCK_SERVICE':
+    value: 'sshd'
+  'DENY_THRESHOLD_INVALID':
+    value: '5'
+  'DENY_THRESHOLD_VALID':
+    value: '10'
+  'DENY_THRESHOLD_ROOT':
+    value: '1'
+  'DENY_THRESHOLD_RESTRICTED':
+    value: '1'
+  'WORK_DIR':
+    value: '/var/lib/denyhosts'
+  'SUSPICIOUS_LOGIN_REPORT_ALLOWED_HOSTS':
+    value: 'YES'  
+  'HOSTNAME_LOOKUP':
+    value => 'YES'
+  'LOCK_FILE':
+    value: '/var/lock/subsys/denyhosts'
+  'ADMIN_EMAIL':
+    value: 'root'
+  'SMTP_HOST':
+    value: 'localhost'
+  'SMTP_PORT':
+    value: '25'
+  'SMTP_USERNAME':
+    value: ''
+  'SMTP_PASSWORD':
+    value: ''
+  'SMTP_FROM':
+    value: 'DenyHosts <nobody@localhost>'
+  'SMTP_SUBJECT':
+    value: 'DenyHosts Report from $[HOSTNAME]'
+  'SMTP_DATE_FORMAT':
+    value: ''
+  'SYSLOG_REPORT':
+    value: ''
+  'ALLOWED_HOSTS_HOSTNAME_LOOKUP':
+    value: ''
+  'AGE_RESET_VALID':
+    value: '5d'
+  'AGE_RESET_ROOT':
+    value: '25d'
+  'AGE_RESET_RESTRICTED':
+    value: '25d'
+  'AGE_RESET_INVALID':
+    value: '10d'
+  'RESET_ON_SUCCESS':
+    value: ''
+  'PLUGIN_DENY':
+    value: '/usr/bin/true'
+  'PLUGIN_PURGE':
+    value: '/usr/bin/true'
+  'USERDEF_FAILED_ENTRY_REGEX':
+    value: ''
+  'DAEMON_LOG':
+    value: '/var/log/denyhosts'
+  'DAEMON_LOG_TIME_FORMAT':
+    value: ''
+  'DAEMON_LOG_MESSAGE_FORMAT':
+    value: ''
+  'DAEMON_SLEEP':
+    value: '30s'
+  'DAEMON_PURGE':
+    value: '1h'
