@@ -7,8 +7,10 @@
 #   - Does not support other osfamily patterns - redhat only
 #
 class denyhosts::params {
-  case $::osfamily {
-    'RedHat': {
+  $denyhosts_package_ensure = 'latest'
+
+  case $::operatingsystem {
+    'CentOS', 'Debian', 'OracleLinux', 'RedHat', 'Scientific': {
       $denyhosts_path    = '/var/lib/denyhosts'
 
       $denyhosts_allowed = "${denyhosts_path}/allowed-hosts"

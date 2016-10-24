@@ -22,14 +22,8 @@
 #      ensure => 'latest'
 #    }
 #
-#  To remove the installation, use:
-#
-#    class { 'denyhosts':
-#      ensure => 'absent'
-#    }
-#
 class denyhosts (
-  $ensure = 'latest'
+  $ensure = $::denyhosts::params::denyhosts_package_ensure
 ) inherits ::denyhosts::params {
   package { $::denyhosts::params::denyhosts_package:
     ensure  => $ensure,
