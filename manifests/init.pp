@@ -35,4 +35,10 @@ class denyhosts (
     ensure  => $ensure,
   }
 
+  service { $::denyhosts::params::denyhosts_service:
+    ensure  => running,
+    enable  => true,
+    require => Package[$::denyhosts::params::denyhosts_package],
+  }
+
 }

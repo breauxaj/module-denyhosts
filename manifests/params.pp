@@ -8,7 +8,7 @@
 #
 class denyhosts::params {
   case $::osfamily {
-    'redhat': {
+    'RedHat': {
       $denyhosts_path    = '/var/lib/denyhosts'
 
       $denyhosts_allowed = "${denyhosts_path}/allowed-hosts"
@@ -19,7 +19,9 @@ class denyhosts::params {
 
       $denyhosts_service = 'denyhosts'
     }
-    default: { }
+    default: {
+      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
+    }
   }
 
 }
