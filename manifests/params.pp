@@ -10,7 +10,7 @@ class denyhosts::params {
   $denyhosts_package_ensure = 'latest'
 
   case $::operatingsystem {
-    'CentOS', 'Debian', 'OracleLinux', 'RedHat', 'Scientific': {
+    'Amazon', 'CentOS', 'Debian', 'OracleLinux', 'RedHat', 'Scientific': {
       $denyhosts_path    = '/var/lib/denyhosts'
 
       $denyhosts_allowed = "${denyhosts_path}/allowed-hosts"
