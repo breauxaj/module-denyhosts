@@ -22,7 +22,7 @@ class denyhosts::params {
       $denyhosts_service = 'denyhosts'
     }
     default: {
-      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
+      fail("The ${module_name} module is not supported on an ${::operatingsystem} based system.")
     }
   }
 
