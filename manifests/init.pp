@@ -29,6 +29,23 @@ class denyhosts (
     ensure  => $ensure,
   }
 
+  case $::operatingsystem {
+    'Amazon': {
+      $denyhosts_script  = '/usr/bin/denyhosts.py'
+
+      if defined(Class["stdlib"]) {
+        file_line { 'python2.6':
+          path  => $denyhosts_script,
+          line  => '#!/usr/bin/python2.6',
+          match => '^#!/usr/bin/python$',
+        }
+      } else {
+        fail("The stdlib module is required for support on ${::operatingsystem} based system.")
+      }
+    }
+    default: { }
+  }
+
   $config = hiera_hash('denyhosts',{})
   create_resources('denyhosts::config',$config)
 
