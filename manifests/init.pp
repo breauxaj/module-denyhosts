@@ -35,9 +35,10 @@ class denyhosts (
 
       if defined(Class["stdlib"]) {
         file_line { 'python2.6':
-          path  => $denyhosts_script,
-          line  => '#!/usr/bin/python2.6',
-          match => '^#!/usr/bin/python$',
+          path   => $denyhosts_script,
+          line   => '#!/usr/bin/python2.6',
+          match  => '^#!/usr/bin/python$',
+          notify => Service[$::denyhosts::params::denyhosts_service],
         }
       } else {
         fail("The stdlib module is required for support on ${::operatingsystem} based system.")

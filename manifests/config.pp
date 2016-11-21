@@ -33,6 +33,7 @@ define denyhosts::config (
     context => $::denyhosts::params::denyhosts_context,
     onlyif  => "get ${key} != '${value}'",
     changes => "set ${key} '${value}'",
+    notify  => Service[$::denyhosts::params::denyhosts_service],
   }
 
 }
