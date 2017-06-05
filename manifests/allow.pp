@@ -11,10 +11,6 @@
 #   - Updates the allowed-hosts file with configured whitelist
 #   - Notify the denyhosts service
 #
-# Requires:
-#
-#  EPEL repository
-#
 # Sample Usage:
 #
 #  To whitelist an IP, use:
@@ -34,8 +30,8 @@ define denyhosts::allow (
     group   => 'root',
     mode    => '0644',
     content => template('denyhosts/allowed.erb'),
-    require => File[$::denyhosts::params::denyhosts_path],
     notify  => Service[$::denyhosts::params::denyhosts_service],
+    require => File[$::denyhosts::params::denyhosts_path],
   }
 
   file { $::denyhosts::params::denyhosts_path:
