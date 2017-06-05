@@ -10,10 +10,6 @@
 # Actions:
 #   - Installs the list of packages
 #
-# Requires:
-#
-#  EPEL repository
-#
 # Sample Usage:
 #
 #  For a standard installation, use:
@@ -26,25 +22,7 @@ class denyhosts (
   $ensure = $::denyhosts::params::denyhosts_package_ensure
 ) inherits ::denyhosts::params {
   package { $::denyhosts::params::denyhosts_package:
-    ensure  => $ensure,
-  }
-
-  case $::operatingsystem {
-    'Amazon': {
-      $denyhosts_script  = '/usr/bin/denyhosts.py'
-
-      if defined(Class["stdlib"]) {
-        file_line { 'python2.6':
-          path   => $denyhosts_script,
-          line   => '#!/usr/bin/python2.6',
-          match  => '^#!/usr/bin/python$',
-          notify => Service[$::denyhosts::params::denyhosts_service],
-        }
-      } else {
-        fail("The stdlib module is required for support on ${::operatingsystem} based system.")
-      }
-    }
-    default: { }
+    ensure   => $ensure,
   }
 
   $config = hiera_hash('denyhosts',{})
