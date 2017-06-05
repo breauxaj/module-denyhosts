@@ -10,10 +10,6 @@
 # Actions:
 #   - Applies settings to the denyhosts.conf file
 #
-# Requires:
-#
-#  EPEL repository
-#
 # Sample Usage:
 #
 #  To configure the service, use:
@@ -30,10 +26,12 @@ define denyhosts::config (
   $key = $title
 
   augeas { "denyhosts_conf/${key}":
-    context => $::denyhosts::params::denyhosts_context,
+    lens    => 'Simplevars.lns',
+    incl    => $::denyhosts::params::denyhosts_config,
     onlyif  => "get ${key} != '${value}'",
     changes => "set ${key} '${value}'",
     notify  => Service[$::denyhosts::params::denyhosts_service],
+    require => Package[$::denyhosts::params::denyhosts_package],
   }
 
 }
