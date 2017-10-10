@@ -25,6 +25,9 @@ class denyhosts (
     ensure   => $ensure,
   }
 
+  $allow = hiera_hash('denyhosts::allow',{})
+  create_resources('denyhosts::allow',$allow)
+
   $config = hiera_hash('denyhosts',{})
   create_resources('denyhosts::config',$config)
 
