@@ -14,11 +14,11 @@ class denyhosts::params {
         default: {
           case $::operatingsystemmajrelease {
             default: {
-              $denyhosts_path     = '/var/lib/denyhosts'
-              $denyhosts_allowed  = "${denyhosts_path}/allowed-hosts"
-              $denyhosts_config   = '/etc/denyhosts.conf'
-              $denyhosts_package  = 'denyhosts'
-              $denyhosts_service  = 'denyhosts'
+              $denyhosts_path    = '/var/lib/denyhosts'
+              $denyhosts_allowed = "${denyhosts_path}/allowed-hosts"
+              $denyhosts_config  = '/etc/denyhosts.conf'
+              $denyhosts_package = 'denyhosts'
+              $denyhosts_service = 'denyhosts'
             }
           }
         }
